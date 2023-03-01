@@ -34,6 +34,8 @@
       - docker-ce
       - docker-ce-cli
       - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
 
 - name: Arrancar el servicio Docker
   service:
@@ -51,3 +53,8 @@
     name: containerd
     daemon_reload: yes
     state: restarted
+
+- name: Crear el alias para el comando docker-compose
+  ansible.builtin.shell: |
+    echo 'docker compose "$@"' > /bin/docker-compose
+    chmod +x /bin/docker-compose

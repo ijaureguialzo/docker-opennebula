@@ -28,3 +28,7 @@ Instalación de un servidor Docker en OpenNebula con Terraform y Ansible.
     ```shell
     make ssh
     ```
+
+## Referencias
+
+- [How to alias docker-compose to docker compose?](https://stackoverflow.com/questions/72099653/how-to-alias-docker-compose-to-docker-compose)
