@@ -2,6 +2,25 @@
 
 Instalación de un servidor Docker en OpenNebula con Terraform y Ansible.
 
+## Prerrequisitos
+
+1. Instalar Docker Desktop para [Windows y macOS](https://www.docker.com/products/docker-desktop/)
+   o [Linux](https://docs.docker.com/desktop/linux/install/).
+
+2. En Windows, instalar [Scoop](https://scoop.sh) usando PowerShell:
+
+   ```powershell
+   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+   [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+   Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+   ```
+
+   Y después instalar los comandos necesarios:
+
+   ```powershell
+   scoop install make
+   ```
+
 ## Puesta en marcha
 
 1. Crear el fichero `.env` a partir de `env-example` y configurar las variables.
