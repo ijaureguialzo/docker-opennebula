@@ -75,3 +75,9 @@ Temporary Items
 
 
 .idea/
+
+.env
+
+terraform/.terraform.lock.hcl
+
+terraform/variables.tf
