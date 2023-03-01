@@ -1,0 +1,21 @@
+locals {
+  opennebula = {
+    connection = {
+      username = "ciber_xx"
+      group    = "ciber_xx"
+      token    = "4b8cf5....................................................c1cb11"
+    }
+    vm = {
+      tag     = "ubuntu-22-04-20230127"
+      network = "ciber_xx"
+    }
+  }
+  ansible = {
+    connect_to_public_ip = false
+  }
+}
+
+variable "SSH_PUBLIC_KEY" {
+  type        = string
+  description = "Clave pública del usuario para inyectar en las máquinas OpenNebula"
+}

@@ -1,0 +1,23 @@
+- name: Configurar el mirror de Ubuntu a utilizar
+  ansible.builtin.copy:
+    src: /ansible/sources.list
+    dest: /etc/apt/sources.list
+
+- name: Hacer un dist-upgrade
+  ansible.builtin.apt:
+    upgrade: dist
+    update_cache: yes
+
+- name: Comprobar si es necesario reiniciar
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+    get_md5: no
+  register: reboot_required_file
+
+- name: Reiniciar el servidor si es necesario
+  ansible.builtin.reboot:
+  when: reboot_required_file.stat.exists == true
+
+- name: Eliminar dependencias obsoletas
+  ansible.builtin.apt:
+    autoremove: yes

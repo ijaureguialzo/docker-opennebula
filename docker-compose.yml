@@ -1,0 +1,21 @@
+version: "3.5"
+
+services:
+
+  terraform-ansible:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+      args:
+        - ALPINE_VERSION=${ALPINE_VERSION}
+    hostname: docker-workspace
+    environment:
+      - TF_VAR_SSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}
+      - PS1=\u@\h:\w\$\040
+    volumes:
+      - ./terraform:/terraform
+      - ./ansible:/ansible
+      - homedir:/root
+
+volumes:
+  homedir:

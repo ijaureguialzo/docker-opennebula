@@ -1,0 +1,53 @@
+- name: Instalar los paquetes necesarios para que apt funcione sobre HTTPS
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+
+- name: Descargar la clave de firma de paquetes de Docker
+  get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/trusted.gpg.d/docker.asc
+
+- name: Obtener el código de versión de Ubuntu
+  shell: lsb_release -cs
+  register: ubuntu_release
+
+- name: Añadir el repositorio apt para la versión estable
+  apt_repository:
+    repo: deb [signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu {{ ubuntu_release.stdout }} stable
+    state: present
+
+- name: Instalar Docker y sus dependencias
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+
+- name: Arrancar el servicio Docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Parche para que containerd arranque correctamente
+  ansible.builtin.shell: |
+    containerd config default | tee /etc/containerd/config.toml >/dev/null 2>&1
+    sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+
+- name: Reiniciar containerd
+  service:
+    name: containerd
+    daemon_reload: yes
+    state: restarted

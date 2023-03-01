@@ -1,0 +1,5 @@
+# Versiones de software
+ALPINE_VERSION=3.17
+
+# Clave pública del usuario para inyectar en las máquinas OpenNebula
+SSH_PUBLIC_KEY=
