@@ -10,3 +10,6 @@ COPY --chmod=0755 *.sh /usr/bin/
 
 # Definir el directorio actual
 WORKDIR /root
+
+# Mostrar el usuario y el host en el prompt
+ENV PS1='\u@\h:\w\$\040'
