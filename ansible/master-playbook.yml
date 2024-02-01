@@ -20,3 +20,9 @@
 
     # Instalar Docker
     - import_tasks: docker-tasks.yml
+
+    # Crear un usuario sin privilegios
+    - import_tasks: user.yml
+
+    # Instalar paquetes adicionales
+    - import_tasks: extras.yml

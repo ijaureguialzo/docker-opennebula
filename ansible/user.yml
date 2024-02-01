@@ -1,0 +1,30 @@
+- name: Añadir el grupo ubuntu con GID 1000
+  group:
+    name: ubuntu
+    gid: 1000
+    state: present
+
+- name: Añadir el usuario ubuntu con UID 1000
+  ansible.builtin.user:
+    name: ubuntu
+    shell: /bin/bash
+    uid: 1000
+    group: ubuntu
+    groups: docker
+    append: yes
+
+- name: Crear el directorio .ssh del usuario ubuntu
+  file:
+    path: /home/ubuntu/.ssh
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+
+- name: Copiar el fichero authorized_keys del root a ubuntu
+  ansible.builtin.copy:
+    src: /root/.ssh/authorized_keys
+    dest: /home/ubuntu/.ssh/authorized_keys
+    remote_src: yes
+    owner: ubuntu
+    group: ubuntu
+    mode: '0400'
