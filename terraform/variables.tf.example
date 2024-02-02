@@ -6,8 +6,15 @@ locals {
       token    = "4b8cf5....................................................c1cb11"
     }
     vm = {
-      tag     = "ubuntu-22-04-20230127"
+      name    = "docker-opennebula"
+      tag     = "ubuntu-22-04-20240116"
       network = "ciber-xx"
+    }
+    limits = {
+      cpu    = 1
+      vcpu   = 2
+      memory = 2048
+      disk   = 8192
     }
   }
   ansible = {

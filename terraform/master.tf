@@ -12,11 +12,11 @@ resource "opennebula_virtual_machine" "master" {
 
   template_id = data.opennebula_template.template.id
 
-  name = "docker-opennebula"
+  name = local.opennebula.vm.name
 
-  cpu    = 1
-  vcpu   = 4
-  memory = 2048
+  cpu    = local.opennebula.limits.cpu
+  vcpu   = local.opennebula.limits.vcpu
+  memory = local.opennebula.limits.memory
 
   context = {
     NETWORK        = "YES"
@@ -34,7 +34,7 @@ resource "opennebula_virtual_machine" "master" {
   disk {
     image_id = data.opennebula_template.template.disk[0].image_id
     target   = "vda"
-    size     = 8192
+    size     = local.opennebula.limits.disk
   }
 }
 
