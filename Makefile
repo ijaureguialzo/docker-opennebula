@@ -17,6 +17,7 @@ help: _header
 	@echo ssh
 	@echo clean
 	@echo nuke-apply
+	@echo reset-terraform
 	@echo ---------------------------------------------
 
 _header:
@@ -56,3 +57,6 @@ clean:
 	@docker compose down -v --remove-orphans
 
 nuke-apply: clean build init destroy apply
+
+reset-terraform:
+	@docker compose run --rm terraform-ansible reset_terraform.sh
