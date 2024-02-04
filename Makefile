@@ -51,7 +51,7 @@ workspace:
 	@docker compose run --rm terraform-ansible /bin/sh
 
 ssh:
-	@docker compose run --rm terraform-ansible run_ssh.sh
+	@docker compose run --rm terraform-ansible run_ssh.sh ubuntu
 
 clean:
 	@docker compose down -v --remove-orphans
