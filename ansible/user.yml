@@ -13,6 +13,12 @@
     groups: docker
     append: yes
 
+- name: Permitir sudo sin contraseña
+  copy:
+    content: 'ubuntu ALL=(ALL:ALL) NOPASSWD:ALL'
+    dest: /etc/sudoers.d/ubuntu_nopasswd
+    mode: 0440
+
 - name: Crear el directorio .ssh del usuario ubuntu
   file:
     path: /home/ubuntu/.ssh
