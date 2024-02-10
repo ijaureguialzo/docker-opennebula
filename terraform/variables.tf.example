@@ -9,6 +9,7 @@ locals {
       name    = "docker-opennebula"
       tag     = "ubuntu-22-04-20240116"
       network = "ciber-xx"
+      locked  = false
     }
     limits = {
       cpu    = 1
