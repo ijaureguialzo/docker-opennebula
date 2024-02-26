@@ -7,7 +7,7 @@ locals {
     }
     vm = {
       name    = "docker-opennebula"
-      tag     = "ubuntu-22-04-20240116"
+      tag     = "ubuntu-22-04-terraform"
       network = "ciber-xx"
       locked  = false
     }
