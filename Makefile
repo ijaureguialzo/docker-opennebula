@@ -14,7 +14,7 @@ help: _header
 	@echo build
 	@echo init / plan / apply / show / output / destroy
 	@echo workspace
-	@echo ssh
+	@echo ssh / ssh-root
 	@echo clean
 	@echo nuke-apply
 	@echo reset-terraform
@@ -52,6 +52,9 @@ workspace:
 
 ssh:
 	@docker compose run --rm terraform-ansible run_ssh.sh ubuntu
+
+ssh-root:
+	@docker compose run --rm terraform-ansible run_ssh.sh
 
 clean:
 	@docker compose down -v --remove-orphans
