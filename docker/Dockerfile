@@ -1,9 +1,9 @@
-ARG ALPINE_VERSION
+ARG TERRAFORM_VERSION
 
-FROM alpine:${ALPINE_VERSION}
+FROM hashicorp/terraform:${TERRAFORM_VERSION}
 
 # Instalar los paquetes necesarios
-RUN apk add terraform ansible openssh jq
+RUN apk add ansible openssh jq
 
 # Copiar los scripts al contenedor
 COPY --chmod=0755 *.sh /usr/bin/
@@ -13,3 +13,6 @@ WORKDIR /root
 
 # Mostrar el usuario y el host en el prompt
 ENV PS1='\u@\h:\w\$\040'
+
+# Eliminar la llamada a Terraform de la imagen original
+ENTRYPOINT []
