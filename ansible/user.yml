@@ -1,36 +1,34 @@
-- name: Añadir el grupo ubuntu con GID 1000
+- name: Añadir el grupo debian con GID 1000
   group:
-    name: ubuntu
+    name: debian
     gid: 1000
     state: present
 
-- name: Añadir el usuario ubuntu con UID 1000
+- name: Añadir el usuario debian con UID 1000
   ansible.builtin.user:
-    name: ubuntu
+    name: debian
     shell: /bin/bash
     uid: 1000
-    group: ubuntu
-    groups: docker
-    append: yes
+    group: debian
 
 - name: Permitir sudo sin contraseña
   copy:
-    content: 'ubuntu ALL=(ALL:ALL) NOPASSWD:ALL'
-    dest: /etc/sudoers.d/ubuntu_nopasswd
+    content: 'debian ALL=(ALL:ALL) NOPASSWD:ALL'
+    dest: /etc/sudoers.d/debian_nopasswd
     mode: 0440
 
-- name: Crear el directorio .ssh del usuario ubuntu
+- name: Crear el directorio .ssh del usuario debian
   file:
-    path: /home/ubuntu/.ssh
+    path: /home/debian/.ssh
     state: directory
-    owner: ubuntu
-    group: ubuntu
+    owner: debian
+    group: debian
 
-- name: Copiar el fichero authorized_keys del root a ubuntu
+- name: Copiar el fichero authorized_keys del root a debian
   ansible.builtin.copy:
     src: /root/.ssh/authorized_keys
-    dest: /home/ubuntu/.ssh/authorized_keys
+    dest: /home/debian/.ssh/authorized_keys
     remote_src: yes
-    owner: ubuntu
-    group: ubuntu
+    owner: debian
+    group: debian
     mode: '0400'

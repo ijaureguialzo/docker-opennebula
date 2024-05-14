@@ -50,4 +50,5 @@ Instalación de un servidor Docker en OpenNebula con Terraform y Ansible.
 
 ## Referencias
 
-- [How to alias docker-compose to docker compose?](https://stackoverflow.com/questions/72099653/how-to-alias-docker-compose-to-docker-compose)
+- [Install Docker Engine on Debian](https://docs.docker.com/engine/install/debian/)
+- [Ansible facts](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_vars_facts.html)

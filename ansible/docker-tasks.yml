@@ -7,21 +7,19 @@
     packages:
       - ca-certificates
       - curl
-      - gnupg
-      - lsb-release
 
 - name: Descargar la clave de firma de paquetes de Docker
   get_url:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    dest: /etc/apt/trusted.gpg.d/docker.asc
+    url: https://download.docker.com/linux/debian/gpg
+    dest: /etc/apt/keyrings/docker.asc
 
-- name: Obtener el código de versión de Ubuntu
-  shell: lsb_release -cs
-  register: ubuntu_release
+- name: Obtener la arquitectura del sistema
+  shell: dpkg --print-architecture
+  register: debian_arch
 
 - name: Añadir el repositorio apt para la versión estable
   apt_repository:
-    repo: deb [signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu {{ ubuntu_release.stdout }} stable
+    repo: deb [arch={{ debian_arch.stdout }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
     state: present
 
 - name: Instalar Docker y sus dependencias
@@ -43,18 +41,8 @@
     state: started
     enabled: yes
 
-- name: Parche para que containerd arranque correctamente
-  ansible.builtin.shell: |
-    containerd config default | tee /etc/containerd/config.toml >/dev/null 2>&1
-    sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
-
-- name: Reiniciar containerd
-  service:
-    name: containerd
-    daemon_reload: yes
-    state: restarted
-
-- name: Crear el alias para el comando docker-compose
-  ansible.builtin.shell: |
-    echo 'docker compose "$@"' > /bin/docker-compose
-    chmod +x /bin/docker-compose
+- name: Añadir el usuario debian al grupo docker
+  ansible.builtin.user:
+    name: debian
+    groups: docker
+    append: yes
