@@ -20,6 +20,7 @@ locals {
   }
   ansible = {
     connect_to_public_ip = false
+    install_portainer    = false
   }
 }
 
