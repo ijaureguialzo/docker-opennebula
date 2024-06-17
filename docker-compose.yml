@@ -11,7 +11,7 @@ services:
     volumes:
       - ./terraform:/terraform
       - ./ansible:/ansible
-      - homedir:/root
+      - ./private/ssh:/root/.ssh
 
 volumes:
   homedir:
