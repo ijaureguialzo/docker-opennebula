@@ -13,9 +13,6 @@ services:
       - ./ansible:/ansible
       - ./private/ssh:/root/.ssh
 
-volumes:
-  homedir:
-
 networks:
   default:
     ipam:
