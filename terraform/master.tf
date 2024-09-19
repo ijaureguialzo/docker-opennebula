@@ -49,6 +49,7 @@ resource "null_resource" "ansible_master" {
   ]
 
   provisioner "local-exec" {
+    quiet   = true
     command = <<EOT
       ANSIBLE_HOST_KEY_CHECKING=False \
       ANSIBLE_FORCE_COLOR=True \
@@ -67,6 +68,7 @@ resource "null_resource" "ansible_portainer" {
   count = local.ansible.install_portainer ? 1 : 0
 
   provisioner "local-exec" {
+    quiet   = true
     command = <<EOT
       ANSIBLE_HOST_KEY_CHECKING=False \
       ANSIBLE_FORCE_COLOR=True \
