@@ -48,6 +48,11 @@ Instalación de un servidor Docker en OpenNebula con Terraform y Ansible.
     make ssh
     ```
 
+## Portainer
+
+Si se activa la opción en el fichero `variables.tf`, se instalará [Portainer](https://www.portainer.io) en la máquina
+para gestionar los contenedores Docker y quedará accesible a través de la URL `https://direccion_ip_mv:9443`.
+
 ## Referencias
 
 - [Install Docker Engine on Debian](https://docs.docker.com/engine/install/debian/)
