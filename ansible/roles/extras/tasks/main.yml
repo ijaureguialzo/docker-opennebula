@@ -6,3 +6,4 @@
   vars:
     packages:
       - make
+      - htop

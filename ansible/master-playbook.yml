@@ -10,21 +10,13 @@
     - group_by: key=reachable
       when: ping_result is success
 
-- name: Configurar el master
+- name: Configurar el servidor
   hosts: reachable
   vars:
     ansible_python_interpreter: auto_silent
   gather_facts: yes
-  become: true
-  tasks:
-    # Actualizar el sistema
-    - import_tasks: upgrade-tasks.yml
-
-    # Crear un usuario sin privilegios
-    - import_tasks: user.yml
-
-    # Instalar Docker
-    - import_tasks: docker-tasks.yml
-
-    # Instalar paquetes adicionales
-    - import_tasks: extras.yml
+  roles:
+    - { role: actualizar, become: yes }
+    - { role: usuario, become: yes }
+    - { role: docker, become: yes }
+    - { role: extras, become: yes }
