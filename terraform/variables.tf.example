@@ -6,8 +6,7 @@ locals {
       token    = "4b8cf5....................................................c1cb11"
     }
     vm = {
-      name    = "docker-opennebula"
-      tag     = "debian-terraform"
+      name    = "Debian 12 - 20250222"
       network = "ciber-xx"
       locked  = false
     }
