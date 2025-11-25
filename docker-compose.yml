@@ -8,6 +8,8 @@ services:
     hostname: docker-workspace
     environment:
       - TF_VAR_SSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}
+    env_file:
+      - ./.env
     volumes:
       - ./terraform:/terraform
       - ./ansible:/ansible

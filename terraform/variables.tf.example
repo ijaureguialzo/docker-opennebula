@@ -1,10 +1,5 @@
 locals {
   opennebula = {
-    connection = {
-      username = "ciber-xx"
-      group    = "ciber-xx"
-      token    = "4b8cf5....................................................c1cb11"
-    }
     vm = {
       name     = "debian-docker"
       template = "Debian 12 - 20250222"
