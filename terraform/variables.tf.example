@@ -9,8 +9,8 @@ locals {
     limits = {
       cpu    = 1
       vcpu   = 2
-      memory = 2048
-      disk   = 8192
+      memory = 2 * 1024
+      disk   = 8 * 1024
     }
   }
   ansible = {
