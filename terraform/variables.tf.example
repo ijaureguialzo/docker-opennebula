@@ -18,8 +18,3 @@ locals {
     install_portainer    = false
   }
 }
-
-variable "SSH_PUBLIC_KEY" {
-  type        = string
-  description = "Clave pública del usuario para inyectar en las máquinas OpenNebula"
-}

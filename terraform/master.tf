@@ -13,10 +13,6 @@ resource "opennebula_virtual_machine" "master" {
   context = {
     NETWORK        = "YES"
     SET_HOSTNAME   = "$NAME"
-    SSH_PUBLIC_KEY = join("\n", [
-      join("\n", split("|", replace(var.SSH_PUBLIC_KEY, "/[\"']/", ""))),
-      file("~/.ssh/id_rsa.pub")
-    ])
   }
 
   nic {
