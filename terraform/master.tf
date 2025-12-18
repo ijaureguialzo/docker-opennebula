@@ -11,8 +11,8 @@ resource "opennebula_virtual_machine" "master" {
   lock = local.opennebula.vm.locked ? "USE" : "UNLOCK"
 
   context = {
-    NETWORK        = "YES"
-    SET_HOSTNAME   = "$NAME"
+    NETWORK      = "YES"
+    SET_HOSTNAME = "$NAME"
   }
 
   nic {
@@ -77,5 +77,5 @@ output "master" {
 }
 
 output "portainer_url" {
-  value = local.ansible.install_portainer ? format("https://%s:9443",local.master.connection_ip) : ""
+  value = local.ansible.install_portainer ? format("https://%s:9443", local.master.connection_ip) : ""
 }
