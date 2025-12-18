@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
       args:
         - TERRAFORM_VERSION=${TERRAFORM_VERSION}
-    hostname: docker-workspace
+    hostname: workspace
     env_file:
       - ./.env
     volumes:
