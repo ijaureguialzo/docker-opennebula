@@ -6,11 +6,13 @@ services:
       args:
         - TERRAFORM_VERSION=${TERRAFORM_VERSION}
     hostname: docker-workspace
-    environment:
-      - TF_VAR_SSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}
     env_file:
       - ./.env
     volumes:
       - ./terraform:/terraform
       - ./ansible:/ansible
-      - ./private/ssh:/root/.ssh
+      - homedir:/root
+      - ${ID_RSA:-./dummy_id_rsa}:/root/.ssh/id_rsa:ro
+
+volumes:
+  homedir:
