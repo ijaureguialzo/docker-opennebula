@@ -1,3 +1,4 @@
+---
 - name: Descargar la clave de firma de paquetes de Docker
   ansible.builtin.get_url:
     url: https://download.docker.com/linux/{{ ansible_facts['distribution'] | lower }}/gpg
@@ -32,10 +33,10 @@
   ansible.builtin.service:
     name: docker
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Añadir el usuario debian al grupo docker
   ansible.builtin.user:
     name: debian
     groups: docker
-    append: yes
+    append: true

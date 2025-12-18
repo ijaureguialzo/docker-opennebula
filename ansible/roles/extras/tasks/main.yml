@@ -1,8 +1,9 @@
+---
 - name: Instalar paquetes extra
-  apt:
+  ansible.builtin.apt:
     name: "{{ packages }}"
     state: present
-    update_cache: yes
+    update_cache: true
   vars:
     packages:
       - make
