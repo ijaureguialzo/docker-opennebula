@@ -49,6 +49,10 @@ resource "terraform_data" "ansible_portainer" {
     terraform_data.ansible_master
   ]
 
+  lifecycle {
+    replace_triggered_by = [terraform_data.ansible_master]
+  }
+
   count = local.ansible.install_portainer ? 1 : 0
 
   provisioner "local-exec" {

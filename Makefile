@@ -49,8 +49,7 @@ destroy:
 	@docker compose run --rm terraform-ansible time -f "Tiempo total: %E" terraform -chdir=/terraform destroy -auto-approve
 
 taint:
-	@docker compose run --rm terraform-ansible terraform -chdir=/terraform taint null_resource.ansible_master
-	@docker compose run --rm terraform-ansible terraform -chdir=/terraform taint null_resource.ansible_portainer
+	@docker compose run --rm terraform-ansible terraform -chdir=/terraform taint terraform_data.ansible_master
 
 workspace:
 	@docker compose run --rm terraform-ansible /bin/sh
