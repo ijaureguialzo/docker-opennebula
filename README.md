@@ -30,7 +30,7 @@ Instalación de un servidor Docker en OpenNebula con Terraform y Ansible.
     ```shell
     make build
     ```
-4. Crear la clave privada SSH para Ansible e inicializar Terraform.
+4. Inicializar Terraform.
 
     ```shell
     make init
@@ -58,3 +58,4 @@ para gestionar los contenedores Docker y quedará accesible a través de la URL 
 - [Install Docker Engine on Debian](https://docs.docker.com/engine/install/debian/)
 - [Ansible facts](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_vars_facts.html)
 - [Install Portainer CE with Docker on Linux](https://docs.portainer.io/v/2.20/start/install-ce/server/docker/linux)
+- [Hello Terraform Data; Goodbye Null Resource](https://devdosvid.blog/2023/04/16/hello-terraform-data-goodbye-null-resource/)
