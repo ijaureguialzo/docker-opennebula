@@ -1,8 +1,18 @@
 ---
-- name: Instalar Portainer
-  ansible.builtin.shell: |
-    docker volume create portainer_data
-    docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=unless-stopped \
-      -v /var/run/docker.sock:/var/run/docker.sock \
-      -v portainer_data:/data \
-      portainer/portainer-ce:lts
+- name: Crear el volumen de datos para Portainer
+  community.docker.docker_volume:
+    name: portainer_data
+
+- name: Arrancar el contenedor de Portainer
+  community.docker.docker_container:
+    name: portainer
+    image: portainer/portainer-ce:lts
+    pull: always
+    state: started
+    restart_policy: unless-stopped
+    published_ports:
+      - 8000:8000
+      - 9443:9443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
