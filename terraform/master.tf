@@ -27,7 +27,7 @@ resource "opennebula_virtual_machine" "master" {
   }
 }
 
-resource "null_resource" "ansible_master" {
+resource "terraform_data" "ansible_master" {
   depends_on = [
     opennebula_virtual_machine.master
   ]
@@ -44,9 +44,9 @@ resource "null_resource" "ansible_master" {
   }
 }
 
-resource "null_resource" "ansible_portainer" {
+resource "terraform_data" "ansible_portainer" {
   depends_on = [
-    null_resource.ansible_master
+    terraform_data.ansible_master
   ]
 
   count = local.ansible.install_portainer ? 1 : 0
