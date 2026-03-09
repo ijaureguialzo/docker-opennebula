@@ -31,34 +31,34 @@ build:
 	@docker compose build --pull
 
 init:
-	@docker compose run --rm terraform-ansible terraform -chdir=/terraform init -upgrade
+	@docker compose run -q --rm terraform-ansible terraform -chdir=/terraform init -upgrade
 
 plan:
-	@docker compose run --rm terraform-ansible terraform -chdir=/terraform plan
+	@docker compose run -q --rm terraform-ansible terraform -chdir=/terraform plan
 
 apply:
-	@docker compose run --rm terraform-ansible time -f "Tiempo total: %E" terraform -chdir=/terraform apply -auto-approve
+	@docker compose run -q --rm terraform-ansible time -f "Tiempo total: %E" terraform -chdir=/terraform apply -auto-approve
 
 show:
-	@docker compose run --rm terraform-ansible terraform -chdir=/terraform show
+	@docker compose run -q --rm terraform-ansible terraform -chdir=/terraform show
 
 output:
-	@docker compose run --rm terraform-ansible terraform -chdir=/terraform output
+	@docker compose run -q --rm terraform-ansible terraform -chdir=/terraform output
 
 destroy:
-	@docker compose run --rm terraform-ansible time -f "Tiempo total: %E" terraform -chdir=/terraform destroy -auto-approve
+	@docker compose run -q --rm terraform-ansible time -f "Tiempo total: %E" terraform -chdir=/terraform destroy -auto-approve
 
 taint:
-	@docker compose run --rm terraform-ansible terraform -chdir=/terraform taint terraform_data.ansible_master
+	@docker compose run -q --rm terraform-ansible terraform -chdir=/terraform taint terraform_data.ansible_master
 
 workspace:
-	@docker compose run --rm terraform-ansible /bin/sh
+	@docker compose run -q --rm terraform-ansible /bin/sh
 
 ssh:
-	@docker compose run --rm terraform-ansible run_ssh.sh debian
+	@docker compose run -q --rm terraform-ansible run_ssh.sh debian
 
 ssh-root:
-	@docker compose run --rm terraform-ansible run_ssh.sh
+	@docker compose run -q --rm terraform-ansible run_ssh.sh
 
 clean:
 	@docker compose down -v --remove-orphans
@@ -66,4 +66,4 @@ clean:
 nuke-apply: clean build init destroy apply
 
 reset-terraform:
-	@docker compose run --rm terraform-ansible reset_terraform.sh
+	@docker compose run -q --rm terraform-ansible reset_terraform.sh
