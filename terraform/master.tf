@@ -11,8 +11,9 @@ resource "opennebula_virtual_machine" "master" {
   lock = local.opennebula.vm.locked ? "USE" : "UNLOCK"
 
   context = {
-    NETWORK      = "YES"
-    SET_HOSTNAME = "$NAME"
+    NETWORK        = "YES"
+    SET_HOSTNAME   = "$NAME"
+    SSH_PUBLIC_KEY = join("\n", split("|", replace(var.SSH_PUBLIC_KEY, "/[\"']/", "")))
   }
 
   nic {

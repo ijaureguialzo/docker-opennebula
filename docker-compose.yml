@@ -6,6 +6,8 @@ services:
       args:
         - TERRAFORM_VERSION=${TERRAFORM_VERSION}
     hostname: workspace
+    environment:
+      - TF_VAR_SSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}
     env_file:
       - ./.env
     volumes:
